@@ -22,7 +22,7 @@ func main() {
 	if len(commit) > 7 {
 		commit = commit[:7]
 	}
-	fmt.Printf("xml2csv v%s (%s)\n", version, commit)
+	fmt.Printf("createfile v%s (%s)\n", version, commit)
 
 	var textPattern string
 	var binaryPattern string
