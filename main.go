@@ -96,6 +96,8 @@ func readBytePattern(textPattern string, binaryPattern string) ([]byte, error) {
 
 func parseSize(sizeStr string) (int64, error) {
 
+	sizeStr = strings.ToUpper(sizeStr)
+
 	if strings.HasSuffix(sizeStr, "GB") {
 		baseSize, err := parseInt64(sizeStr[:len(sizeStr)-len("GB")])
 		if err != nil {
