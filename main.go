@@ -3,13 +3,14 @@ package main
 import (
 	"bufio"
 	"encoding/hex"
-	"flag"
 	"fmt"
 	"io"
 	"log"
 	"os"
 	"strconv"
 	"strings"
+
+	flag "github.com/spf13/pflag"
 )
 
 var (
@@ -30,12 +31,13 @@ func main() {
 	var outputPath string
 	var help bool
 
-	flag.StringVar(&textPattern, "t", "", "text pattern")
-	flag.StringVar(&binaryPattern, "b", "", "binary pattern")
-	flag.StringVar(&sizeStr, "s", "", "size")
-	flag.StringVar(&outputPath, "o", "", "output file path")
-	flag.BoolVar(&help, "h", false, "Help")
+	flag.StringVarP(&textPattern, "text", "t", "", "text pattern")
+	flag.StringVarP(&binaryPattern, "binary", "b", "", "binary pattern")
+	flag.StringVarP(&sizeStr, "size", "s", "", "size")
+	flag.StringVarP(&outputPath, "output", "o", "", "output file path")
+	flag.BoolVarP(&help, "help", "h", false, "Help")
 	flag.Parse()
+	flag.CommandLine.SortFlags = false
 
 	if help {
 		flag.Usage()

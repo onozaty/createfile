@@ -18,15 +18,11 @@ The arguments are as follows.
 
 ```
 Usage of createfile:
-  -b string
-        binary pattern
-  -h    Help
-  -o string
-        output file path
-  -s string
-        size
-  -t string
-        text pattern
+  -t, --text string     text pattern      
+  -b, --binary string   binary pattern    
+  -s, --size string     size
+  -o, --output string   output file path  
+  -h, --help            Help
 ```
 
 ## Install
