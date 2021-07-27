@@ -1,5 +1,8 @@
 # createfile
 
+[![GitHub license](https://img.shields.io/github/license/onozaty/createfile)](https://github.com/onozaty/createfile/blob/main/LICENSE)
+[![Test](https://github.com/onozaty/createfile/actions/workflows/test.yaml/badge.svg)](https://github.com/onozaty/createfile/actions/workflows/test.yaml)
+
 The createfile can create files of a specified size.  
 You can easily create large file.
 
