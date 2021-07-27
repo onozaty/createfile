@@ -1,6 +1,7 @@
 # createfile
 
-The createfile can create files of a specified size.
+The createfile can create files of a specified size.  
+You can easily create large file.
 
 ## Usage
 

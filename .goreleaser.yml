@@ -7,8 +7,8 @@ builds:
       - CGO_ENABLED=0
     ldflags:
       - -s -w
-      - -X github.com/onozaty/createfile/main.Version={{.Version}}
-      - -X github.com/onozaty/createfile/main.Revision={{.ShortCommit}}
+      - -X main.Version={{.Version}}
+      - -X main.Revision={{.ShortCommit}}
     goos:
       - linux
       - windows
