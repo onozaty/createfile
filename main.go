@@ -14,16 +14,11 @@ import (
 )
 
 var (
-	version = "dev"
-	commit  = "none"
+	Version  = "dev"
+	Revision = "dev"
 )
 
 func main() {
-
-	if len(commit) > 7 {
-		commit = commit[:7]
-	}
-	fmt.Printf("createfile v%s (%s)\n", version, commit)
 
 	var textPattern string
 	var binaryPattern string
@@ -40,11 +35,13 @@ func main() {
 	flag.CommandLine.SortFlags = false
 
 	if help {
+		fmt.Printf("createfile v%s (%s)\n", Version, Revision)
 		flag.Usage()
 		os.Exit(0)
 	}
 
 	if sizeStr == "" || outputPath == "" {
+		fmt.Printf("createfile v%s (%s)\n", Version, Revision)
 		flag.Usage()
 		os.Exit(1)
 	}
