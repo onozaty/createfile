@@ -14,8 +14,8 @@ import (
 )
 
 var (
-	Version  = "dev"
-	Revision = "dev"
+	Version = "dev"
+	Commit  = "dev"
 )
 
 func main() {
@@ -33,15 +33,18 @@ func main() {
 	flag.BoolVarP(&help, "help", "h", false, "Help")
 	flag.Parse()
 	flag.CommandLine.SortFlags = false
+	flag.Usage = func() {
+		fmt.Printf("createfile v%s (%s)\n\n", Version, Commit)
+		fmt.Fprint(os.Stderr, "Usage:\n  createfile [flags]\n\nFlags\n")
+		flag.PrintDefaults()
+	}
 
 	if help {
-		fmt.Printf("createfile v%s (%s)\n", Version, Revision)
 		flag.Usage()
 		os.Exit(0)
 	}
 
 	if sizeStr == "" || outputPath == "" {
-		fmt.Printf("createfile v%s (%s)\n", Version, Revision)
 		flag.Usage()
 		os.Exit(1)
 	}

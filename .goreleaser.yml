@@ -8,7 +8,7 @@ builds:
     ldflags:
       - -s -w
       - -X main.Version={{.Version}}
-      - -X main.Revision={{.ShortCommit}}
+      - -X main.Commit={{.ShortCommit}}
     goos:
       - linux
       - windows
