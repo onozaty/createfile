@@ -21,12 +21,16 @@ $ createfile -b 616263 -s 1GB -o 1gb.txt
 The arguments are as follows.
 
 ```
-Usage of createfile:
-  -t, --text string     text pattern      
-  -b, --binary string   binary pattern    
-  -s, --size string     size
-  -o, --output string   output file path  
-  -h, --help            Help
+Usage:
+  createfile [flags]
+
+Flags
+  -t, --text string     Text pattern.
+  -b, --binary string   Binary pattern. This is specified in hexadecimal. (ex. 0A0F)
+                        If neither --text nor --binary is specified, the value will be 00.
+  -s, --size string     Size. Can be specified in KB, MB, or GB. (ex. 1gb)
+  -o, --output string   Output file path.
+  -h, --help            Help.
 ```
 
 ## Install
