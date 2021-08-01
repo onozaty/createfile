@@ -26,11 +26,11 @@ func main() {
 	var outputPath string
 	var help bool
 
-	flag.StringVarP(&textPattern, "text", "t", "", "text pattern")
-	flag.StringVarP(&binaryPattern, "binary", "b", "", "binary pattern")
-	flag.StringVarP(&sizeStr, "size", "s", "", "size")
-	flag.StringVarP(&outputPath, "output", "o", "", "output file path")
-	flag.BoolVarP(&help, "help", "h", false, "Help")
+	flag.StringVarP(&textPattern, "text", "t", "", "Text pattern.")
+	flag.StringVarP(&binaryPattern, "binary", "b", "", "Binary pattern. This is specified in hexadecimal. (ex. 0A0F)\nIf neither --text nor --binary is specified, the value will be 00.")
+	flag.StringVarP(&sizeStr, "size", "s", "", "Size. Can be specified in KB, MB, or GB. (ex. 1gb)")
+	flag.StringVarP(&outputPath, "output", "o", "", "Output file path.")
+	flag.BoolVarP(&help, "help", "h", false, "Help.")
 	flag.Parse()
 	flag.CommandLine.SortFlags = false
 	flag.Usage = func() {
@@ -49,26 +49,31 @@ func main() {
 		os.Exit(1)
 	}
 
-	size, err := parseSize(sizeStr)
+	err := run(textPattern, binaryPattern, sizeStr, outputPath)
 	if err != nil {
 		log.Fatal(err)
+	}
+}
+
+func run(textPattern string, binaryPattern string, sizeStr string, outputPath string) error {
+
+	size, err := parseSize(sizeStr)
+	if err != nil {
+		return err
 	}
 
 	bytes, err := readBytePattern(textPattern, binaryPattern)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	file, err := os.Create(outputPath)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 	defer file.Close()
 
-	err = write(file, bytes, size)
-	if err != nil {
-		log.Fatal(err)
-	}
+	return write(file, bytes, size)
 }
 
 func write(file io.Writer, bytes []byte, size int64) error {
@@ -83,8 +88,7 @@ func write(file io.Writer, bytes []byte, size int64) error {
 		}
 	}
 
-	writer.Flush()
-	return nil
+	return writer.Flush()
 }
 
 func readBytePattern(textPattern string, binaryPattern string) ([]byte, error) {
@@ -93,7 +97,11 @@ func readBytePattern(textPattern string, binaryPattern string) ([]byte, error) {
 		return []byte(textPattern), nil
 	}
 
-	return hex.DecodeString(binaryPattern)
+	if binaryPattern != "" {
+		return hex.DecodeString(binaryPattern)
+	}
+
+	return []byte{0x00}, nil
 }
 
 func parseSize(sizeStr string) (int64, error) {
